@@ -25026,8 +25026,7 @@ a:not([href]):not([tabindex]) {
 }
 
 .quick_bet-wrap dd {
-    float: left;
-
+    float: left
 }
 
 .quick-bet-confirm {
@@ -25066,7 +25065,7 @@ a:not([href]):not([tabindex]) {
 .slip-back input,
 .slip-lay input {
     margin: 0;
-    padding: 0 6px 0;
+    padding: 0 6px 0 0;
     width: 90%;
     line-height: 22px;
     text-align: right
@@ -26116,26 +26115,18 @@ a:not([href]):not([tabindex]) {
 
 @media only screen and (max-width:992px) {
 
-    .quick_bet-wrap .col-stake.betfair-stack {
-        width: 30% !important;
-        margin-left: 0;
-        float: right;
-    }
-
-    .quick_bet-wrap .betfairodds {
-        text-align: left;
+    .fancy-quick-tr .quick_bet-wrap .betfair-stack,
+    .fancy-quick-tr .quick_bet-wrap .betfairodds {
+        width: 45% !important
     }
 
     .betfair-stack {
         margin-left: 19px
     }
 
-    .quick_bet-wrap .col-btn {
-        width: auto;
-        margin-left: 5%;
-    }
-    .quick_bet-wrap .col-send {
-        width: 100%;
+    .fancy-quick-tr .quick_bet-wrap .betfairodds input,
+    .quick_bet-wrap .betfair-stack .oddinput {
+        width: 70% !important
     }
 
     .hiddedn-xs {
@@ -26195,6 +26186,11 @@ a:not([href]):not([tabindex]) {
         padding: 0
     }
 
+    .col-btn,
+    .col-send {
+        display: none
+    }
+
     .quick_bet-wrap .col-stake_list ul {
         padding-right: 0;
         padding-bottom: 8px
@@ -26214,8 +26210,7 @@ a:not([href]):not([tabindex]) {
     }
 
     .quick_bet-wrap dd {
-        text-align: left;
-        text-align: center;
+        text-align: left
     }
 
     .col-stake .oddinput {
@@ -26260,6 +26255,11 @@ a:not([href]):not([tabindex]) {
     .betmobile-btn .col-btn,
     .betmobile-btn .col-send {
         display: inline-block
+    }
+
+    .quick_bet-wrap .col-btn,
+    .quick_bet-wrap .col-send {
+        width: 100%
     }
 
     .slip-back .col-stake_list {
@@ -26310,12 +26310,29 @@ a:not([href]):not([tabindex]) {
         padding: 0
     }
 
+    .col-stake .oddinput {
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border: unset;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa
+    }
+
     .col-stake .icon-plus {
         display: inline-block
     }
 
     .col-stake input {
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
         text-align: center;
+        padding-left: 45px;
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset
     }
 
     .app-header .navbar-nav {

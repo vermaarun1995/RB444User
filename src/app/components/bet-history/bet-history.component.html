@@ -130,9 +130,9 @@
                                                 <td>{{betData.amountStake}}</td>
                                                 <td>{{betData.placeTime | date:'medium' }}</td>
                                                 <td>{{betData.matchedTime | date:'medium' }}</td>
-                                                <td>{{betData.updatedDate | date:'medium' }}</td>
+                                                <td>{{betData.settleTime | date:'medium' }}</td>
                                             </tr>
-                                            <tr *ngIf="betDataList.length === 0">
+                                            <tr>
                                                 <td colspan="10" class="text-center">No Record Found.</td>
                                             </tr>
                                         </ng-container>

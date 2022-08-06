@@ -1,16 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
 import { ResponseModel } from "src/app/models/responseModel";
-import { StackLimit } from "src/app/models/stackLimit";
 import * as StackAction from "../actions/stack.action";
 
 
-const initialState : StackLimit[] = [];
+const initialState : ResponseModel = {
+    isSuccess:false,
+    message:"",
+    status:0,
+    data:null
+};
 
 export const StackReducer = createReducer(
     initialState,
-    on(StackAction.GET_STACK_SUCCESS, (state, action) => (action.stack)),
-    on(StackAction.UPDATE_STACK_SUCCESS, (state, action) => (
-        state = action.stack
-    ))
+    on(StackAction.GET_STACK_SUCCESS, (state, action) => (action.res.data))
 )
 

@@ -17,7 +17,6 @@ export class AllsportHighlightComponent implements OnInit, OnChanges {
   eventList : any;
 
   getAllEventsList:any = (sportId : number) =>{
-    this.eventList = null;
     this.service.get(`exchange/GetSportEvents?SportId=${sportId}`)
     .subscribe((response:ResponseModel) => {
       if(response.isSuccess == true && response.data != null){

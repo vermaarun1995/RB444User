@@ -20,16 +20,16 @@ export class StackSettingsComponent implements OnInit {
 
   isCollapsed: boolean = true;
   stackLimitList: StackLimit[] = [];
-  stackData?: Observable<StackLimit[]>;
+  stackData? : Observable<StackLimit[]>;
 
   stackForm: FormGroup;
 
   constructor(public service: HttpService,
-    public fb: FormBuilder,
-    public notification: NotificationService,
+    public fb: FormBuilder, 
+    public notification: NotificationService, 
     public modalService: NgbModal,
-    private store: Store<{ StackData: StackLimit[] }>
-  ) {
+    private store : Store<{StackData : StackLimit[]}>
+    ) {
     this.stackForm = this.fb.group({
       stackList: this.fb.array([])
     });
@@ -47,15 +47,13 @@ export class StackSettingsComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.stackData?.subscribe((stack: StackLimit[]) => {
+  ngOnInit(): void {    
+    this.stackData?.subscribe((stack:StackLimit[]) => {
       if (stack.length > 0) {
         this.stackLimitList = stack;
-        if (this.stackList.controls.length == 0) {
-          stack.forEach((x) => {
-            this.stackList.push(this.stackPatchValue(x));
-          })
-        }
+        this.stackLimitList.forEach((x) => {
+          this.stackList.push(this.stackPatchValue(x));
+        })
       }
     });
   }
@@ -65,16 +63,17 @@ export class StackSettingsComponent implements OnInit {
       this.notification.showError("Enter a valid number.");
       return;
     }
-    this.store.dispatch(UPDATE_STACK({ state : this.stackLimitList , stack: this.stackForm.controls.stackList.value }));
-    console.log(this.stackForm.controls);
+    this.store.dispatch(UPDATE_STACK(this.stackForm.controls.stackList.value));
+    console.log(this.stackForm.controls.stackList.value);
     return;
     this.service.post('Setting/UpdateStakeLimit', this.stackForm.controls.stackList.value)
-      .subscribe((response: ResponseModel) => {
-        if (response.isSuccess == true) {
-          this.notification.showSuccess(response.message);
-          this.modalService.dismissAll();
-        }
-      });
+    .subscribe((response:ResponseModel) => {
+          if(response.isSuccess == true){
+            this.notification.showSuccess(response.message);
+            this.modalService.dismissAll();
+          }
+        });
+
   }
 
   openStackModal(content: any) {

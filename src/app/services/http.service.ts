@@ -34,6 +34,16 @@ export class HttpService {
           }));
       }));
   }
+  getAll(url: string): Observable<ResponseModel> {
+    return this.getConfig()
+      .pipe(flatMap(appSettings => {
+        this.appSettings = appSettings;
+        return this.http.get<ResponseModel>(appSettings.apiUrl + url)
+          .pipe(switchMap((resp) => {
+            return of(resp)
+          }));
+      }));
+  }
 
   post(url: string, body: any): Observable<ResponseModel> {
     return this.getConfig()

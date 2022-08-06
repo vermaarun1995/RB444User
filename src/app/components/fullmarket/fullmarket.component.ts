@@ -52,6 +52,7 @@ export class FullmarketComponent implements OnInit, OnDestroy {
     this.service.get(`exchange/GetMatchOdds?marketId=${marketId}&eventId=${eventId}&SportId=${sportId}`)
       .subscribe((response:ResponseModel) => {
         if (response.isSuccess == true && response.data.data != null) {
+          this.inPlay = response.data.data.inPlay;
           if(response.data.data.matchOddsData != null){
             this.matchOddsData = response.data.data.matchOddsData;
           }
@@ -61,18 +62,20 @@ export class FullmarketComponent implements OnInit, OnDestroy {
           if(response.data.data.fancyData != null){
             this.fancyBetData = response.data.data.fancyData;
           }
-          if(response.data.data.inPlay == true && this.isUserLogin == true){
-            this.inPlay = response.data.data.inPlay;
-            setTimeout(() => {
-              this.getMarketsOfEventList(this.marketId, this.eventId, this.sportId);
-            }, 2000);
-          }
         }
       });
   }
 
   ngOnInit(): void {
-    this.getMarketsOfEventList(this.marketId, this.eventId, this.sportId);    
+    const subscriptionInterval = interval(1000);
+    this.subscription = subscriptionInterval.subscribe(x => {
+      if(this.inPlay == true && this.isUserLogin == true){
+        this.getMarketsOfEventList(this.marketId, this.eventId, this.sportId);
+      }else{
+        this.subscription.unsubscribe();
+      }
+    });
+    
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

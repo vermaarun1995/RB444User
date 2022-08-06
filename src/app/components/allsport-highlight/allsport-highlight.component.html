@@ -9,7 +9,6 @@
         <div class="tab-content">
             <div class="game-menu-tab hidden-xs homeevent tab-container">
                 <div class="row">
-                    <div class="col-md-12 text-center p-2" *ngIf="eventList==null">Loading...</div>
                     <div class="col-md-12 mobile-width" *ngIf="eventList">
                         <table class="table table-hover">
                             <app-table-row [tableRowList]="eventList" [multiMarketPin]="true" class="d-table w-100">

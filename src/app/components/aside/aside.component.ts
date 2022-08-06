@@ -1,8 +1,6 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { ResponseModel } from 'src/app/models/responseModel';
 import { AuthService } from 'src/app/services/auth.service';
-import { BetService } from 'src/app/services/getBet.service';
 import { HttpService } from 'src/app/services/http.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -11,17 +9,22 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.css']
 })
-export class AsideComponent implements OnInit, OnChanges {
+export class AsideComponent implements OnInit {
 
   isLoginUser: boolean = false;
   marketList: MarketList[] = [];
   showBetInfo: boolean[] = [];
-  constructor(
-    private authService: AuthService, 
-    private sessionService: SessionService, 
-    private service: HttpService,
-    private betService: BetService
-  ) { }
+  constructor(private authService: AuthService, private sessionService: SessionService, private service: HttpService) { }
+
+  getMarketList(): void {
+    let userId = this.sessionService.getLoggedInUser().id;
+    this.service.get(`Common/GetMarketList?UserId=${userId}`)
+      .subscribe((response: ResponseModel) => {
+        if (response.isSuccess == true && response.data !== null) {
+          this.marketList = response.data;
+        }
+      });
+  }
 
   selectBetId: number = 0;
   betListData: BetData[] = [];
@@ -40,27 +43,12 @@ export class AsideComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes")
-  }
-
-  getMarketData(){
-    return this.betService._getBetData.pipe(
-      mergeMap(data => data)
-    );
-  }
-
-
   ngOnInit(): void {
     this.authService._isLoginUser.subscribe(
       (res) => {
         this.isLoginUser = res;
-        if(res==true){
-          this.getMarketData().subscribe(response => {
-            if (response.isSuccess == true && response.data !== null) {
-              this.marketList = response.data;
-            }
-          })
+        if (this.isLoginUser == true) {
+          this.getMarketList();
         }
       }
     )

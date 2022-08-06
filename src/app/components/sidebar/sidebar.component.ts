@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
     this.service.get(`exchange/GetSeries?SportId=${sportId}&type=1`)
     .subscribe((response:ResponseModel) => {
       if(response.data != null && response.isSuccess == true){
-        this.sportTournamentsList = response.data;
+        this.sportTournamentsList?.push(...response.data);
         this.isSportTournaments = true;
       }
     });
@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit {
     this.service.get(`exchange/GetMatches?SportId=${SportId}&SeriesId=${SeriesId}&type=1`)
     .subscribe((response:ResponseModel) => {
       if(response.data != null){
-        this.tournamentEventsList = response.data;
+        this.tournamentEventsList.push(...response.data);
         for(let a = 0; a < this.sportTournamentsList.length; a++){
           if(a != index){
             this.isSportTournamentsCollapsed[a] = false;

@@ -5,15 +5,10 @@ import { StackLimit } from "src/app/models/stackLimit";
 export const GET_STACK = createAction("GET_STACK");
 export const GET_STACK_SUCCESS = createAction(
     "GET_STACK_SUCCESS",
-    props<{stack : StackLimit[]}>()
+    props<{res : ResponseModel}>()
 )
 export const UPDATE_STACK = createAction(
     "UPDATE_STACK",
-    props<{state : StackLimit[], stack : StackLimit[]}>()
-)
-
-export const UPDATE_STACK_SUCCESS = createAction(
-    "UPDATE_STACK_SUCCESS",
     props<{stack : StackLimit[]}>()
 )
 

@@ -50,11 +50,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StackEffects } from './store/effects/stack.effect';
 import { StackReducer } from './store/reducers/stack.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { InplayEffect } from './store/effects/inplay.effect';
-import { InplayReducer } from './store/reducers/inplay.reducer';
-import { SportEffect } from './store/effects/getSport.effect';
-import { SportReducer } from './store/reducers/getSport.reducer';
-import { BetService } from './services/getBet.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -105,15 +100,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    StoreModule.forRoot({StackData : StackReducer, InplayData : InplayReducer, SportData : SportReducer}),
-    EffectsModule.forRoot([StackEffects,InplayEffect, SportEffect]),
+    StoreModule.forRoot({StackData : StackReducer}),
+    EffectsModule.forRoot([StackEffects]),
     StoreDevtoolsModule.instrument({
       maxAge : 25,
       logOnly : true,
       autoPause : true
     })
   ],
-  providers: [AuthService, HttpService, SessionService, BetService, InterceptorService,
+  providers: [AuthService, HttpService, SessionService, InterceptorService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

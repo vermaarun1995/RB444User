@@ -23,8 +23,8 @@
                 <div class="game-menu-tab hidden-xs homeevent tab-container">
                     <ul ngbNav #nav="ngbNav" (navChange)="navChange($event)" (activeIdChange)="activeIdChange($event)"
                         [(activeId)]="active" class="nav-tabs">
-                        <li [ngbNavItem]="4" >
-                            <a ngbNavLink *ngIf="cricketData">Cricket</a>
+                        <li [ngbNavItem]="4">
+                            <a ngbNavLink>Cricket</a>
                             <ng-template ngbNavContent>
                                 <div class="row" *ngIf="sportData">
                                     <div class="col-md-12 mobile-width">
@@ -41,8 +41,8 @@
                                 </div>
                             </ng-template>
                         </li>
-                        <li [ngbNavItem]="1" >
-                            <a ngbNavLink *ngIf="soccerData">Soccer</a>
+                        <li [ngbNavItem]="1">
+                            <a ngbNavLink>Soccer</a>
                             <ng-template ngbNavContent>
                                 <div class="row" *ngIf="sportData">
                                     <div class="col-md-12 mobile-width">
@@ -59,8 +59,8 @@
                                 </div>
                             </ng-template>
                         </li>
-                        <li [ngbNavItem]="2" >
-                            <a ngbNavLink *ngIf="tennisData">Tennis</a>
+                        <li [ngbNavItem]="2">
+                            <a ngbNavLink>Tennis</a>
                             <ng-template ngbNavContent>
                                 <div class="row" *ngIf="sportData">
                                     <div class="col-md-12 mobile-width">

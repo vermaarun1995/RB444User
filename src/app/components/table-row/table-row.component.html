@@ -12,7 +12,7 @@
     <tr *ngFor="let tableColumn of tableRowList">
         <td hidden="">1</td>
         <td>
-            <a class="match-name" [routerLink]="['/fullmarket', tableColumn.marketId, tableColumn.gameId, tableColumn.eid]"><span>{{tableColumn.eventName.split("/")[0]}}</span></a>
+            <a class="match-name" [routerLink]="['/fullmarket', tableColumn.marketId, tableColumn.gameId, tableColumn.eid]"><span>{{tableColumn.eventName.slice(0, tableColumn.eventName.indexOf("/"))}}</span></a>
             <span *ngIf="tableColumn.inPlay=='True'" class="in_play">In-Play</span>
             <!-- <span *ngIf="tableColumn.tv == 'True'" class="in_play"><i class="fa fa-television"></i></span> -->
             <!-- <p *ngIf="tableColumn.inPlay !='True'" class="match-time">{{tableColumn.eventName.slice(tableColumn.eventName.indexOf("/")+1)}} | {{ tableColumn.eventDate | date : 'medium' }} </p> -->

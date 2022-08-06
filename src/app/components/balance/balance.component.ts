@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponseModel } from 'src/app/models/responseModel';
-import { BetService } from 'src/app/services/getBet.service';
 import { HttpService } from 'src/app/services/http.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -11,7 +10,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class BalanceComponent implements OnInit {
 
-  constructor(private service: HttpService, private sessionService : SessionService, private betService : BetService) { }
+  constructor(private service: HttpService, private sessionService : SessionService) { }
 
   openingBalance : number = 0;
   exposureBalance : number = 0;
@@ -43,10 +42,6 @@ export class BalanceComponent implements OnInit {
   ngOnInit(): void {
     this.getOpeningBalance();
     this.getExposureBalance();
-
-    this.betService._getBetData.subscribe(res => {
-      this.refreshBalance();
-    });
   }
 
 }

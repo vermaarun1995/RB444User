@@ -8,10 +8,20 @@ import { LoaderService } from './services/loader.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
-    constructor(private router: Router, private sessionService: SessionService, private loaderService : LoaderService) { 
-
-    }
+    constructor(private router: Router, private sessionService: SessionService, private loaderService : LoaderService) { console.log("a"); }
+    public userToken = "1255";
     intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // if (this.userToken) {
+        //     const tokenReq: HttpRequest<any> = httpRequest.clone({
+        //         setHeaders: {
+        //             Authorization: `Bearer ${this.userToken}`
+        //         }
+        //     });
+        //     return next.handle(tokenReq);
+        // }
+        // catch any errors. Ensure user is logged out if necessary and have them log in
+
+        //this.loaderService.show();
         if(httpRequest.url.includes("GetMatchOdds")!=true){
             this.loaderService.isLoading.next(true);
         }
